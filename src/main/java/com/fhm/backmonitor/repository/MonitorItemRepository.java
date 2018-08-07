@@ -12,16 +12,12 @@ import java.util.List;
 public interface MonitorItemRepository extends JpaRepository<MonitorItem,Long> {
 
     //根据SRPid查
-//    @Override
-//    List<MonitorItem> findAll();
+    //    @Override
+    //    List<MonitorItem> findAll();
 
     /*根据srpId查所有监控项，并根据classify排序(显示srp的监控项列表)*/
     List<MonitorItem> findBySrpIdOrderByClassify(Long srpId);
 
     /*通过id获取监控项*/
     MonitorItem findByMonitorId(Long mobitorItemId);
-
-
-
-
 }

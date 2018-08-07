@@ -486,7 +486,7 @@ public class Jpatest {
     public void testUserInsert2() {
 
         List<User> users = new ArrayList<>();
-        for (int i=10;i<=20;i++){
+        for (int i=10;i<=30;i++){
             User user = new User();
             user.setRole(2);
             user.setPhone((long) (183000000+i));

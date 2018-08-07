@@ -39,23 +39,6 @@ public class MonitorItemServiceImpl implements MonitorItemService {
     @Transactional
     @Override
     public MonitorItem monitorItemInsert(MonitorItem monitorItem) {
-//        MonitorItem monitorItem1 = new MonitorItem();
-//
-//        monitorItem1.setMonitorType(monitorItem.getMonitorType());
-//        monitorItem1.setMonitorName(monitorItem.getMonitorName());
-//        monitorItem1.setRemark(monitorItem.getRemark());
-//        monitorItem1.setUrl(monitorItem.getUrl());
-//        monitorItem1.setRequestType(monitorItem.getRequestType());
-//        monitorItem1.setRequestBody(monitorItem.getRequestBody());
-//        monitorItem1.setAsserts(monitorItem.getAsserts());
-//        monitorItem1.setClassify(monitorItem.getClassify());
-//        monitorItem1.setSrpId(monitorItem.getSrpId());
-
-//        SRP srp = monitorItem.getSrp();
-//        monitorItem1.setSrp(srp);
-//        srp.getMonitorItems().add(monitorItem1);
-//
-//        srpRepository.save(srp);
         MonitorItem save = monitorItemRepository.save(monitorItem);
         return save;
     }
@@ -64,15 +47,15 @@ public class MonitorItemServiceImpl implements MonitorItemService {
     @Transactional
     @Override
     public MonitorItem monitorItemUpdate(MonitorItem monitorItem) {
-//        MonitorItem monitorItem1 = monitorItemRepository.findByMonitorId(monitorItem.getMonitorId());
+        MonitorItem monitorItem1 = monitorItemRepository.findByMonitorId(monitorItem.getMonitorId());
         if (monitorItem!=null){
-//            monitorItem1.setMonitorName(monitorItem.getMonitorName());
-//            monitorItem1.setRemark(monitorItem.getRemark());
-//            monitorItem1.setUrl(monitorItem.getUrl());
-//            monitorItem1.setRequestType(monitorItem.getRequestType());
-//            monitorItem1.setRequestBody(monitorItem.getRequestBody());
-//            monitorItem1.setAsserts(monitorItem.getAsserts());
-            return monitorItemRepository.saveAndFlush(monitorItem);
+            monitorItem1.setMonitorName(monitorItem.getMonitorName());
+            monitorItem1.setRemark(monitorItem.getRemark());
+            monitorItem1.setUrl(monitorItem.getUrl());
+            monitorItem1.setRequestType(monitorItem.getRequestType());
+            monitorItem1.setRequestBody(monitorItem.getRequestBody());
+            monitorItem1.setAsserts(monitorItem.getAsserts());
+            return monitorItemRepository.saveAndFlush(monitorItem1);
         }
         return null;
     }

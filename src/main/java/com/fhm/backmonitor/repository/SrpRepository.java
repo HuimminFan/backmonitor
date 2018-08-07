@@ -21,7 +21,7 @@ public interface SrpRepository extends JpaRepository<SRP,Long>,JpaSpecificationE
 //    List<SRP> findSRPSByuserId(Long userId);
 
     /*根据id获取srp*/
-    SRP findBySrpId(Long srpId);
+    SRP findBySrpIdOrderBySrpId(Long srpId);
 
     @Modifying
     @Query(value = "delete from SRP s where s.srpId = :srpId ")

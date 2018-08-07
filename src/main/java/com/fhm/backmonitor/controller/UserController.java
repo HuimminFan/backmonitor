@@ -98,7 +98,7 @@ public class UserController {
 
     /*用户新增*/
     @PostMapping("/userInsert")
-    public RespEntity userInsert(@RequestBody ReqUser reqUser){
+    public RespEntity userInsert(@RequestBody  ReqUser reqUser){
         User user1 = userService.userInsert(reqUser);
         if (user1!=null){
             return new RespEntity(RespCode.SUCCESS,user1);
@@ -129,9 +129,10 @@ public class UserController {
     }
 
     /*更新用户密码*/
-    @PutMapping("/updateUserpwd")
-    public RespEntity updateUserpwd(@RequestBody ReqUser reqUser, @RequestBody String oldPwd, @RequestBody String userPwd){
-        User user = userService.updateUserpwd(reqUser.getUserId(), oldPwd, userPwd);
+    @PutMapping ("/updateUserpwd/{UserId}/{oldPwd}/{userPwd}")
+    public RespEntity updateUserpwd(@PathVariable Long  UserId, @PathVariable String oldPwd, @PathVariable String userPwd){
+        System.err.println(UserId+oldPwd+userPwd);
+        User user = userService.updateUserpwd(UserId, oldPwd, userPwd);
         if (user!=null){
             return new RespEntity(RespCode.SUCCESS,user);
         }
@@ -143,13 +144,20 @@ public class UserController {
         }
     }
 
+    /*重置用户密码*/
+    @PostMapping ("/upsetUserpwd/{userId}/{userPwd}")
+    public RespEntity upsetUserpwd(@PathVariable Long userId, @PathVariable String userPwd){
+        User user1 = userService.upsetUserpwd(userId, userPwd);
+        return new RespEntity(RespCode.SUCCESS,user1);
+    }
+
     /*删除一个用户*/
     @DeleteMapping("/delUserById")
     public RespEntity deleteUserById(@RequestParam("userId") Long userId){
-        RespCode respCode1 = userService.deleteById(userId);
+        userService.deleteById(userId);
         User user = userRepository.findByUserId(userId);
         if(user==null){
-            return new RespEntity(respCode1);
+            return new RespEntity(RespCode.SUCCESS);
         }
         else {
             RespCode respCode = RespCode.WARN;
@@ -177,6 +185,21 @@ public class UserController {
         else {
             RespCode respCode = RespCode.WARN;
             respCode.setMsg("根据srpId获取用户失败");
+            respCode.setCode(-1);
+            return new RespEntity(respCode);
+        }
+    }
+
+    /*判断当前手机号是否已存在（是否已有对应用户）*/
+    @GetMapping("/isPhoneRepet/{phone}")
+    public RespEntity isPhoneRepet(@PathVariable Long phone){
+        User user = userService.isPhoneRepet(phone);
+        if (user==null){
+            return new RespEntity(RespCode.SUCCESS);
+        }
+        else {
+            RespCode respCode = RespCode.WARN;
+            respCode.setMsg("此手机号已有人使用");
             respCode.setCode(-1);
             return new RespEntity(respCode);
         }

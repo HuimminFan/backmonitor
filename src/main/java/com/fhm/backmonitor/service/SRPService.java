@@ -1,9 +1,9 @@
 package com.fhm.backmonitor.service;
 
 
+import com.fhm.backmonitor.entity.MonitorItem;
 import com.fhm.backmonitor.entity.SRP;
 import com.fhm.backmonitor.entity.User;
-import com.fhm.backmonitor.enums.RespCode;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public interface SRPService {
     SRP getSrpById(Long srpId);
 
     //新增SRP
-    SRP srpInsert(SRP srp);
+    SRP srpInsert(SRP srp,List<Long> userIds);
 
     //更新SRP
     SRP srpUpdate(SRP srp);
@@ -32,7 +32,7 @@ public interface SRPService {
     int userSub(Long srpId, Long userId);
 
     /*删除一个SRP*/
-    RespCode deleteById(Long srpId);
+    void deleteById(Long srpId);
 
     /*删除多个SRP*/
     void deleteSrplist(List<Long> srpIDs);
@@ -44,7 +44,7 @@ public interface SRPService {
     List<User> getUserList();
 
     /*给SRP加监控项*/
-    SRP monitorItemAdd(Long srpId, Long monitorItemId);
+    SRP monitorItemAdd(MonitorItem monitorItem);
 
     /*给SRP减监控项*/
     void monitorItemSub(Long monitorItemId);
